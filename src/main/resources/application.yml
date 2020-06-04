@@ -1,0 +1,62 @@
+#server settings
+server:
+    port : 9090
+    address : 0.0.0.0
+    contextPath : /
+    #Tomcat specifics
+    tomcat:
+        accessLogEnabled : true
+        protocolHeader : x-forwarded-proto
+        remoteIpHeader : x-forwarded-for
+        basedir:
+        backgroundProcessorDelay : 30 # secs
+spring:
+  resources:
+    static-locations: classpath:/static/
+  profiles :
+    active: RELEASE
+  jackson:
+    date-format : yyyy-MM-dd HH:mm:ss
+  datasource:
+    url: jdbc:mysql://localhost:3306/gps?useSSL=true&useUnicode=true&characterEncoding=utf-8
+    driverClass: com.mysql.jdbc.Driver
+    username: root
+    password: 7632785
+    initialSize: 2
+    minIdl: 2
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 300000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 600000
+    #validationQuery: select "1"
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: "druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000"
+    # 合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+
+mapper:
+  not-empty: false
+  identity: MYSQL
+pagehelper:
+  helperDialect: mysql
+#  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+logging:
+    level:
+       com.ibatis: DEBUG
+       cn.jafir.springboot: TRACE

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jafir.springboot.service.dao.IUserDao">
+    <!--信息列表 -->
+    <select id="getUsers" resultType="com.jafir.springboot.service.model.User">
+        SELECT * FROM user
+    </select>
+
+    <insert id="createUser" keyProperty="uid" useGeneratedKeys="true"
+            parameterType="com.jafir.springboot.service.model.User">
+
+        <!--<selectKey keyProperty="uid" order="AFTER" resultType="java.lang.Integer">-->
+        <!--SELECT LAST_INSERT_ID()-->
+        <!--</selectKey>-->
+        INSERT into user(username,password,name,create_time)
+        VALUE (#{username},#{password},#{name},#{create_time})
+    </insert>
+
+    <update id="updateUser" parameterType="com.jafir.springboot.service.model.User">
+        UPDATE user SET token = #{token},username = #{username},name=#{name},password=#{password},update_time=#{update_time}
+        WHERE uid = #{uid}
+    </update>
+</mapper>
