@@ -1,4 +1,4 @@
-package com.jafir.springboot.service.model;
+package com.jafir.springboot.service.model.api;
 
 /**
  * Created by jafir on 2020/6/4.

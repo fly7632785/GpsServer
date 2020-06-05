@@ -1,9 +1,9 @@
 package com.jafir.springboot.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.jafir.springboot.service.model.ResponseResult;
-import com.jafir.springboot.service.model.ResponseUtil;
-import com.jafir.springboot.service.model.ResultCode;
+import com.jafir.springboot.service.model.api.ResponseResult;
+import com.jafir.springboot.service.model.api.ResponseUtil;
+import com.jafir.springboot.service.model.api.ResultCode;
 import com.jafir.springboot.util.JwtUtil;
 import com.jafir.springboot.util.LogUtil;
 import org.springframework.web.servlet.HandlerInterceptor;

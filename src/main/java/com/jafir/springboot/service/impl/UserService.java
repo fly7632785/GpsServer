@@ -1,7 +1,7 @@
 package com.jafir.springboot.service.impl;
 
-import com.jafir.springboot.service.IUserService;
-import com.jafir.springboot.service.dao.IUserDao;
+import com.jafir.springboot.service.IUserServiceI;
+import com.jafir.springboot.service.dao.UserMapper;
 import com.jafir.springboot.service.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,30 +12,31 @@ import java.util.List;
  * Created by jafir on 2018/3/7.
  */
 @Service
-public class UserService extends BaseService implements IUserService {
+public class UserService extends BaseService implements IUserServiceI {
+
     @Autowired
-    IUserDao userDao;
+    UserMapper userMapper;
 
     @Override
     public List<User> getUsers() {
-        return userDao.getUsers();
+        return userMapper.getUsers();
     }
 
     @Override
     public User getUserByName(String username) {
-        return userDao.getUserByName(username);
+        return userMapper.getUserByName(username);
     }
 
     @Override
     public Integer createUser(User user) {
-        return userDao.createUser(user);
+        return userMapper.insert(user);
     }
 
     @Override
     public boolean checkUser(String username, String password) {
-        User user = userDao.getUserByName(username);
+        User user = userMapper.getUserByName(username);
         if (user != null) {
-            if (user.getPassword().equals(password)) {
+            if (password.equals(user.getPassword())) {
                 return true;
             }
         }
@@ -44,11 +45,11 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public Integer updateUser(User user) {
-        return userDao.updateUser(user);
+        return userMapper.updateByPrimaryKey(user);
     }
 
     @Override
-    public void deleteUser(String uid) {
-        userDao.deleteUser(uid);
+    public void deleteUser(Long uid) {
+        userMapper.deleteByPrimaryKey(uid);
     }
 }

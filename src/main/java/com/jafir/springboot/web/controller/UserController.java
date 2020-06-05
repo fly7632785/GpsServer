@@ -1,8 +1,8 @@
 package com.jafir.springboot.web.controller;
 
-import com.jafir.springboot.service.IUserService;
-import com.jafir.springboot.service.model.ResponseResult;
-import com.jafir.springboot.service.model.ResponseUtil;
+import com.jafir.springboot.service.IUserServiceI;
+import com.jafir.springboot.service.model.api.ResponseResult;
+import com.jafir.springboot.service.model.api.ResponseUtil;
 import com.jafir.springboot.service.model.User;
 import com.jafir.springboot.service.model.result.LoginResult;
 import com.jafir.springboot.util.JwtUtil;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class UserController extends BaseController {
 
     @Autowired
-    private IUserService userService;
+    private IUserServiceI userService;
 
 
     @RequestMapping(value = "/getusers", method = RequestMethod.GET)
@@ -44,13 +44,13 @@ public class UserController extends BaseController {
             userService.updateUser(user);
             return ResponseUtil.makeOK(new LoginResult(token, user));
         }
-        return ResponseUtil.make500Err(ResponseUtil.LOGIN_FAIL);
+        return ResponseUtil.make400Err(ResponseUtil.LOGIN_FAIL);
     }
 
     @RequestMapping(value = "/create_user", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult<User> createUser(@RequestBody User user) {
-        user.setCreate_time(System.currentTimeMillis());
+        user.setCreateTime(System.currentTimeMillis());
         User userByName = userService.getUserByName(user.getUsername());
         if (userByName != null) {
             return ResponseUtil.make400Err("用户已经注册");
@@ -65,7 +65,7 @@ public class UserController extends BaseController {
         if (user.getUid() == null) {
             return ResponseUtil.make400Err("userId不能为空");
         }
-        user.setUpdate_time(System.currentTimeMillis());
+        user.setUpdateTime(System.currentTimeMillis());
         userService.updateUser(user);
         LogUtil.info("user1" + user);
         return ResponseUtil.makeOK(user);
@@ -74,7 +74,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult<User> deleteUser(@RequestParam String uid) {
-        userService.deleteUser(uid);
+        userService.deleteUser(Long.valueOf(uid));
         return ResponseUtil.makeOK();
     }
 }
