@@ -15,9 +15,14 @@ import java.util.List;
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
 
+
+
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TokenInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new TokenInterceptor())
+                .addPathPatterns("/**").
+                excludePathPatterns("/error","/login","/create_user","/getAllUrl");
     }
 
     /**

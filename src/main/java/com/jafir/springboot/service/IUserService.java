@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by jafir on 2018/3/7.
  */
-public interface IUserServiceI extends IBaseService {
+public interface IUserService extends IBaseService {
 
     List<User> getUsers();
 
@@ -20,4 +20,6 @@ public interface IUserServiceI extends IBaseService {
     Integer updateUser(User user);
 
     void deleteUser(Long uid);
+
+    User getUserById(Long uid);
 }

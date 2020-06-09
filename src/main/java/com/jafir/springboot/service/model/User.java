@@ -25,6 +25,9 @@ public class User implements Serializable {
 
     private String avatar;
 
+    public User() {
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Long getUid() {

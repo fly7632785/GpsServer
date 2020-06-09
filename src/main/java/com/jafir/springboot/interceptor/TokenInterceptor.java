@@ -20,9 +20,13 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LogUtil.info("url:" + request.getRequestURI());
-        if (request.getRequestURI().equals("/login") || request.getRequestURI().equals("/create_user")) {
-            return true;
-        }
+
+        //获取所有注册的url  如果不包含的url 不拦截 最终走向404
+//        if (!ApplicationContextUtil.getAllUrl().contains(request.getRequestURI())) {
+//            return true;
+//        }
+
+
         String token = request.getHeader("token");
         LogUtil.info("token:" + token);
         //token不存在

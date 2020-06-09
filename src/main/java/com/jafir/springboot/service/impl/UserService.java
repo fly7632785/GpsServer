@@ -1,6 +1,6 @@
 package com.jafir.springboot.service.impl;
 
-import com.jafir.springboot.service.IUserServiceI;
+import com.jafir.springboot.service.IUserService;
 import com.jafir.springboot.service.dao.UserMapper;
 import com.jafir.springboot.service.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by jafir on 2018/3/7.
  */
 @Service
-public class UserService extends BaseService implements IUserServiceI {
+public class UserService extends BaseService implements IUserService {
 
     @Autowired
     UserMapper userMapper;
@@ -51,5 +51,10 @@ public class UserService extends BaseService implements IUserServiceI {
     @Override
     public void deleteUser(Long uid) {
         userMapper.deleteByPrimaryKey(uid);
+    }
+
+    @Override
+    public User getUserById(Long uid) {
+        return userMapper.selectByPrimaryKey(uid);
     }
 }

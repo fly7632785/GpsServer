@@ -1,11 +1,9 @@
 package com.jafir.springboot.service.dao;
 
 import com.jafir.springboot.service.model.User;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Long uid);
 

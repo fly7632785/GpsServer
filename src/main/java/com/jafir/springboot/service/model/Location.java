@@ -9,11 +9,14 @@ public class Location implements Serializable {
 
     private Double lng;
 
-    private Integer time;
+    private Long time;
 
     private Long uid;
 
     private static final long serialVersionUID = 1L;
+
+    public Location() {
+    }
 
     public Integer getId() {
         return id;
@@ -39,11 +42,11 @@ public class Location implements Serializable {
         this.lng = lng;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 
@@ -52,6 +55,13 @@ public class Location implements Serializable {
     }
 
     public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public Location(Double lat, Double lng, Long time, Long uid) {
+        this.lat = lat;
+        this.lng = lng;
+        this.time = time;
         this.uid = uid;
     }
 

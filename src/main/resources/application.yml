@@ -44,6 +44,12 @@ spring:
     connectionProperties: "druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000"
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
+  # 解决http返回数据中文乱码
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
