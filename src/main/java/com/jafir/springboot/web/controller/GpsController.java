@@ -36,7 +36,7 @@ public class GpsController extends BaseController {
         if (location != null) {
             return ResponseUtil.makeOK(location);
         }
-        return ResponseUtil.make400Err("没有实时数据");
+        return ResponseUtil.makeErr("没有实时数据");
     }
 
     @RequestMapping(value = "/gpsHis", method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class GpsController extends BaseController {
         if (location != null) {
             return ResponseUtil.makeOK(location);
         }
-        return ResponseUtil.make400Err("没有历史数据");
+        return ResponseUtil.makeErr("没有历史数据");
     }
 
 }

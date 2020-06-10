@@ -13,16 +13,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 @Configuration
-public class WebAppConfig implements WebMvcConfigurer {
+public class WebAppConfig implements WebMvcConfigurer{
+//    这里不推荐用 support，因为它会是spring本身的自动配置失效 影响较大
+//public class WebAppConfig extends WebMvcConfigurationSupport{
 
 
+//    这里等价于 .yml 的
+//      static-path-pattern: /res/**
+//    resources:
+//      static-locations: classpath:/static/ , file:/Users/jafir/Downloads/ #静态资源配置
+//
 
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/res/**")
+//                //本地磁盘下面的文件 会映射 为/路径下
+//                //比如/Users/jafir/Downloads/a.jpg 可以用 localhost:xx/res/a.jpg来访问
+//                .addResourceLocations("file:/Users/jafir/Downloads/")   //媒体资源
+//                //比如/static/img/a3.jpg 可以用 localhost:xx/res/img/a3.jpg来访问
+//                //比如/static/test.html 可以用 localhost:xx/res/test.html来访问
+//                .addResourceLocations("classpath:/static/");
+//    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**").
-                excludePathPatterns("/error","/login","/create_user","/getAllUrl");
+                excludePathPatterns("/error","/login","/create_user","/getAllUrl","/test1","/test.html");
     }
 
     /**

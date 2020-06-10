@@ -48,6 +48,11 @@ public class UserController extends BaseController {
     }
 
 
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    public String test() {
+        return "test";
+    }
+
     @RequestMapping(value = "/getusers", method = RequestMethod.GET)
     @ResponseBody
     public List<User> getUsers() {
@@ -68,7 +73,7 @@ public class UserController extends BaseController {
             userService.updateUser(user);
             return ResponseUtil.makeOK(new LoginResult(token, user.getUid().toString()));
         }
-        return ResponseUtil.make400Err(ResponseUtil.LOGIN_FAIL);
+        return ResponseUtil.makeErr("登录失败");
     }
 
 
@@ -79,7 +84,7 @@ public class UserController extends BaseController {
         if (user != null) {
             return ResponseUtil.makeOK();
         }
-        return ResponseUtil.make400Err(ResponseUtil.LOGIN_FAIL);
+        return ResponseUtil.makeErr();
     }
 
 
@@ -89,7 +94,7 @@ public class UserController extends BaseController {
         user.setCreateTime(System.currentTimeMillis());
         User userByName = userService.getUserByName(user.getUsername());
         if (userByName != null) {
-            return ResponseUtil.make400Err("用户已经注册");
+            return ResponseUtil.makeErr("用户已经注册");
         }
         userService.createUser(user);
         return ResponseUtil.makeOK(user);
@@ -99,7 +104,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResponseResult<User> updateUser(@RequestBody User user) {
         if (user.getUid() == null) {
-            return ResponseUtil.make400Err("userId不能为空");
+            return ResponseUtil.makeErr("userId不能为空");
         }
         user.setUpdateTime(System.currentTimeMillis());
         userService.updateUser(user);

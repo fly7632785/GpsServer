@@ -11,8 +11,16 @@ server:
         basedir:
         backgroundProcessorDelay : 30 # secs
 spring:
+
+  mvc:
+    view:
+      prefix: /
+      suffix: .html   # 静态网页资源配置
+    throw-exception-if-no-handler-found: true  #全局异常处理
+    static-path-pattern: /res/**
   resources:
-    static-locations: classpath:/static/
+    static-locations: classpath:/static/ , file:/Users/jafir/Downloads/ #静态资源配置
+#    add-mappings: false #关闭工程资源映射，全局异常处理按道理要关闭，但是不推荐，这里不关闭
   profiles :
     active: RELEASE
   jackson:
