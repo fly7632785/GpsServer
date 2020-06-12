@@ -2,6 +2,7 @@ package com.jafir.springboot.service.dao;
 
 import com.jafir.springboot.service.model.Location;
 import com.jafir.springboot.service.model.request.GpsHisRequest;
+import com.jafir.springboot.service.model.result.NowGpsResult;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface LocationMapper {
     List<Location> selectByUidTime(GpsHisRequest request);
 
     Location selectByUid(Long uid);
+
+    List<NowGpsResult> getAllNowGps();
 }

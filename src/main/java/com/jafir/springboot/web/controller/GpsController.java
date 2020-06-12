@@ -5,6 +5,8 @@ import com.jafir.springboot.service.model.Location;
 import com.jafir.springboot.service.model.api.ResponseResult;
 import com.jafir.springboot.service.model.api.ResponseUtil;
 import com.jafir.springboot.service.model.request.GpsHisRequest;
+import com.jafir.springboot.service.model.result.NowGpsResult;
+import com.jafir.springboot.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,9 @@ public class GpsController extends BaseController {
 
     @RequestMapping(value = "gps", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult gps(@RequestBody Location location) {
+    public ResponseResult gps(@RequestBody Location location,@RequestHeader("token")String token) {
+        Long uid = Long.valueOf(JwtUtil.getUserId(token));
+        location.setUid(uid);
         gpsService.upload(location);
         return ResponseUtil.makeOK();
     }
@@ -31,8 +35,19 @@ public class GpsController extends BaseController {
 
     @RequestMapping(value = "/nowGps", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<Location> getNowGps(@RequestParam Long uid) {
+    public ResponseResult<Location> getNowGps(@RequestHeader("token")String token) {
+        Long uid = Long.valueOf(JwtUtil.getUserId(token));
         Location location = gpsService.getNowGps(uid);
+        if (location != null) {
+            return ResponseUtil.makeOK(location);
+        }
+        return ResponseUtil.makeErr("没有实时数据");
+    }
+
+    @RequestMapping(value = "/allNowGps", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult<List<NowGpsResult>> getAllNowGps() {
+        List<NowGpsResult> location = gpsService.getAllNowGps();
         if (location != null) {
             return ResponseUtil.makeOK(location);
         }

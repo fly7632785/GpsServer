@@ -68,7 +68,7 @@ public class UserController extends BaseController {
         boolean result = userService.checkUser(username, password);
         if (result) {
             User user = userService.getUserByName(username);
-            String token = JwtUtil.sign(username, password);
+            String token = JwtUtil.sign(username, String.valueOf(user.getUid()));
             user.setToken(token);
             userService.updateUser(user);
             return ResponseUtil.makeOK(new LoginResult(token, user.getUid().toString()));
@@ -76,17 +76,18 @@ public class UserController extends BaseController {
         return ResponseUtil.makeErr("登录失败");
     }
 
-
-    @RequestMapping(value = "/get_info", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_info", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
-    public ResponseResult<LoginResult> getUserInfo(@RequestParam Long uid) {
-        User user = userService.getUserById(uid);
+    public ResponseResult<User> getUserInfo(@RequestHeader(value = "token") String token) {
+        LogUtil.info("token:"+token);
+        String userId = JwtUtil.getUserId(token);
+        LogUtil.info("userId:"+userId);
+        User user = userService.getUserById(Long.valueOf(userId));
         if (user != null) {
-            return ResponseUtil.makeOK();
+            return ResponseUtil.makeOK(user);
         }
         return ResponseUtil.makeErr();
     }
-
 
     @RequestMapping(value = "/create_user", method = RequestMethod.POST)
     @ResponseBody

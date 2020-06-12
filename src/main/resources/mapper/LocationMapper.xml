@@ -115,4 +115,18 @@
     </select>
 
 
+    <select id="getAllNowGps" resultType="com.jafir.springboot.service.model.result.NowGpsResult">
+        SELECT
+            l.uid,
+            lat,
+            lng,
+            avatar,
+            name
+        FROM (SELECT DISTINCT *
+              FROM location
+              ORDER BY uid, time
+                  DESC) AS l LEFT JOIN user ON l.uid = user.uid
+        GROUP BY l.uid;
+
+    </select>
 </mapper>

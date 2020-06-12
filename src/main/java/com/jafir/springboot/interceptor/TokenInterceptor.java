@@ -17,13 +17,18 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LogUtil.info("url:" + request.getRequestURI());
 
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            LogUtil.info("OPTIONS:" + request.getRequestURI());
+            return true;
+        }
+
         //获取所有注册的url  如果不包含的url 不拦截 最终走向404
-        
+
 //        if (!ApplicationContextUtil.getAllUrl().contains(request.getRequestURI())) {
 //            return true;
 //        }
 
-//        LogUtil.info("handler:" + handler);
+        LogUtil.info("handler:" + handler);
 //        if(handler instanceof ResourceHttpRequestHandler){
 //           return true;
 //        }

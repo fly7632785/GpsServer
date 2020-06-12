@@ -7,6 +7,7 @@ package com.jafir.springboot.config;
 import com.jafir.springboot.interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -35,11 +36,26 @@ public class WebAppConfig implements WebMvcConfigurer{
 //                .addResourceLocations("classpath:/static/");
 //    }
 
+    /**
+     * 页面跨域访问Controller过滤
+     *
+     * @return
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        WebMvcConfigurer.super.addCorsMappings(registry);
+        registry.addMapping("/**")
+                .allowedHeaders("*")
+                .allowedMethods("POST","GET","OPTIONS")
+                .allowedOrigins("http://localhost:8083");
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**").
-                excludePathPatterns("/error","/login","/create_user","/getAllUrl","/test1","/test.html");
+                excludePathPatterns("/error","/login","/create_user",
+                        "/getAllUrl","/test1","/test.html");
     }
 
     /**
