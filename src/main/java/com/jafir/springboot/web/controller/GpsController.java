@@ -56,7 +56,9 @@ public class GpsController extends BaseController {
 
     @RequestMapping(value = "/gpsHis", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<List<Location>> getGpsHis(@RequestBody GpsHisRequest request) {
+    public ResponseResult<List<Location>> getGpsHis(@RequestHeader("token")String token,@RequestBody GpsHisRequest request) {
+        Long uid = Long.valueOf(JwtUtil.getUserId(token));
+        request.setUid(uid);
         List<Location> location = gpsService.getGpsHis(request);
         if (location != null) {
             return ResponseUtil.makeOK(location);

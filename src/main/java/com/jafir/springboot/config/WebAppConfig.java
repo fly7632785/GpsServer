@@ -47,7 +47,8 @@ public class WebAppConfig implements WebMvcConfigurer{
         registry.addMapping("/**")
                 .allowedHeaders("*")
                 .allowedMethods("POST","GET","OPTIONS")
-                .allowedOrigins("http://localhost:8083");
+                .allowedOrigins("http://localhost:8083","http://localhost:8080");
+
     }
 
     @Override
