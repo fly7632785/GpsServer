@@ -79,7 +79,7 @@ public class JwtUtil {
      */
     public static String sign(String username, String userId) {
         //            过期时间
-        Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        Date date = new Date(System.currentTimeMillis() + 30*EXPIRE_TIME);
 //            私钥及加密算法
         Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
 //            设置头部信息

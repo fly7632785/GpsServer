@@ -25,7 +25,7 @@ public class GpsController extends BaseController {
 
     @RequestMapping(value = "gps", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult gps(@RequestBody Location location,@RequestHeader("token")String token) {
+    public ResponseResult gps(@RequestBody Location location, @RequestHeader("token") String token) {
         Long uid = Long.valueOf(JwtUtil.getUserId(token));
         location.setUid(uid);
         gpsService.upload(location);
@@ -35,7 +35,7 @@ public class GpsController extends BaseController {
 
     @RequestMapping(value = "/nowGps", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<Location> getNowGps(@RequestHeader("token")String token) {
+    public ResponseResult<Location> getNowGps(@RequestHeader("token") String token) {
         Long uid = Long.valueOf(JwtUtil.getUserId(token));
         Location location = gpsService.getNowGps(uid);
         if (location != null) {
@@ -56,9 +56,11 @@ public class GpsController extends BaseController {
 
     @RequestMapping(value = "/gpsHis", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<List<Location>> getGpsHis(@RequestHeader("token")String token,@RequestBody GpsHisRequest request) {
-        Long uid = Long.valueOf(JwtUtil.getUserId(token));
-        request.setUid(uid);
+    public ResponseResult<List<Location>> getGpsHis(@RequestHeader("token") String token, @RequestBody GpsHisRequest request) {
+        if (request.getUid() == null || request.getUid() == 0) {
+            Long uid = Long.valueOf(JwtUtil.getUserId(token));
+            request.setUid(uid);
+        }
         List<Location> location = gpsService.getGpsHis(request);
         if (location != null) {
             return ResponseUtil.makeOK(location);

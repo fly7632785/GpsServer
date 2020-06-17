@@ -3,6 +3,7 @@ package com.jafir.springboot.service.impl;
 import com.jafir.springboot.service.IUserService;
 import com.jafir.springboot.service.dao.UserMapper;
 import com.jafir.springboot.service.model.User;
+import com.jafir.springboot.service.model.result.AllUserResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserService extends BaseService implements IUserService {
     UserMapper userMapper;
 
     @Override
-    public List<User> getUsers() {
+    public List<AllUserResult> getUsers() {
         return userMapper.getUsers();
     }
 

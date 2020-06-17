@@ -1,6 +1,7 @@
 package com.jafir.springboot.service;
 
 import com.jafir.springboot.service.model.User;
+import com.jafir.springboot.service.model.result.AllUserResult;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface IUserService extends IBaseService {
 
-    List<User> getUsers();
+    List<AllUserResult> getUsers();
 
     User getUserByName(String username);
 

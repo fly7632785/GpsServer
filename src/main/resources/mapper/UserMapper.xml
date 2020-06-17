@@ -162,7 +162,7 @@
     where uid = #{uid,jdbcType=BIGINT}
   </update>
 
-  <select id="getUsers" resultType="com.jafir.springboot.service.model.User">
+  <select id="getUsers" resultType="com.jafir.springboot.service.model.result.AllUserResult">
     SELECT * FROM user
   </select>
 

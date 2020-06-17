@@ -4,6 +4,7 @@ import com.jafir.springboot.service.IUserService;
 import com.jafir.springboot.service.model.User;
 import com.jafir.springboot.service.model.api.ResponseResult;
 import com.jafir.springboot.service.model.api.ResponseUtil;
+import com.jafir.springboot.service.model.result.AllUserResult;
 import com.jafir.springboot.service.model.result.LoginResult;
 import com.jafir.springboot.util.JwtUtil;
 import com.jafir.springboot.util.LogUtil;
@@ -47,24 +48,16 @@ public class UserController extends BaseController {
         return result;
     }
 
-
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
-    public String test() {
-        return "test";
-    }
-
     @RequestMapping(value = "/getusers", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public  ResponseResult<List<AllUserResult>> getUsers() {
+        return ResponseUtil.makeOK(userService.getUsers());
     }
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<LoginResult> login(@RequestBody Map<String, String> map) {
-        String username = map.get("username");
-        String password = map.get("password");
+    public ResponseResult<LoginResult> login(@RequestParam("username") String username,@RequestParam("password") String password) {
         boolean result = userService.checkUser(username, password);
         if (result) {
             User user = userService.getUserByName(username);

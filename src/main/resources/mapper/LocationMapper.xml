@@ -121,7 +121,8 @@
             lat,
             lng,
             avatar,
-            name
+            name,
+            time
         FROM (SELECT DISTINCT *
               FROM location
               ORDER BY uid, time

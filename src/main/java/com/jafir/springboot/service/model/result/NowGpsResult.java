@@ -10,6 +10,7 @@ public class NowGpsResult {
     private Long uid;
     private Double lat;
     private Double lng;
+    private Long time;
     private String avatar;
     private String name;
 }
