@@ -46,7 +46,7 @@ public class UserService extends BaseService implements IUserService {
 
     @Override
     public Integer updateUser(User user) {
-        return userMapper.updateByPrimaryKey(user);
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 
     @Override

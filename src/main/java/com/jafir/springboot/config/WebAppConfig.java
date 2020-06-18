@@ -46,7 +46,7 @@ public class WebAppConfig implements WebMvcConfigurer{
         WebMvcConfigurer.super.addCorsMappings(registry);
         registry.addMapping("/**")
                 .allowedHeaders("*")
-                .allowedMethods("POST","GET","OPTIONS")
+                .allowedMethods("*")
 //                .allowedOrigins("http://localhost:8083","http://localhost:8080");
                 .allowedOrigins("*");
 

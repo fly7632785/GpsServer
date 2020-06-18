@@ -96,9 +96,10 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/update_user", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<User> updateUser(@RequestBody User user) {
+    public ResponseResult<User> updateUser(@RequestHeader("token") String token,@RequestBody User user) {
         if (user.getUid() == null) {
-            return ResponseUtil.makeErr("userId不能为空");
+            Long uid = Long.valueOf(JwtUtil.getUserId(token));
+            user.setUid(uid);
         }
         user.setUpdateTime(System.currentTimeMillis());
         userService.updateUser(user);
