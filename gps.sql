@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 18/06/2020 17:49:03
+ Date: 22/06/2020 16:45:53
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `location` (
   `time` bigint DEFAULT NULL,
   `uid` bigint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of location
@@ -92,25 +92,26 @@ CREATE TABLE `user` (
   `uid` bigint NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
-  `token` varchar(255) DEFAULT NULL,
-  `name` varchar(40) DEFAULT NULL,
+  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
+  `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
   `create_time` bigint NOT NULL,
   `update_time` bigint DEFAULT NULL,
-  `mobile` varchar(16) DEFAULT NULL,
+  `mobile` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
   `gender` tinyint(1) DEFAULT '0' COMMENT '0:男 1:女',
   `user_role` tinyint NOT NULL DEFAULT '0',
-  `avatar` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
+  `last_login_time` bigint DEFAULT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES (5, 'jafir1', 'jafir1', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjEiLCJleHAiOjE1OTIwMTM0MTYsInVzZXJJZCI6IjUifQ.9oyatHZT5c9BtrKRFK-hXNFdxjmwO9eAWmovnCt_QNE', 'jafir11111', 1591260914901, 1591265388499, NULL, 0, 0, 'http://tupian.qqjay.com/tou2/2018/1106/60bdf5b88754650e51ccee32bb6ac8ae.jpg');
-INSERT INTO `user` VALUES (7, 'jafir', '', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpciIsImV4cCI6MTU5NTA2NTM3NiwidXNlcklkIjoiNyJ9.tGQY9TqJ8QSA-1_Uor3S-6hCcSg6R2FGQ24J8R8Tvl4', 'cc222', 1591263522452, 1592473383210, NULL, 0, 0, 'http://tupian.qqjay.com/tou2/2018/1106/60bdf5b88754650e51ccee32bb6ac8ae.jpg');
-INSERT INTO `user` VALUES (8, 'jafir111', 'jafir', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjExMSIsImV4cCI6MTU5MjAxMzQ3NCwidXNlcklkIjoiOCJ9.c2frWaz66ccDy8nwz3ESt3TfPOnXfmG8eofc0PPC-HI', 'jafir', 1591263705525, NULL, NULL, 0, 0, 'http://tupian.qqjay.com/tou2/2018/1106/60bdf5b88754650e51ccee32bb6ac8ae.jpg');
+INSERT INTO `user` VALUES (5, 'jafir1', 'jafir1', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjEiLCJleHAiOjE1OTUzOTkzNjEsInVzZXJJZCI6IjUifQ.b19laBWFeHhihs3MfD7p6P849FOdqUVt7BP6mM0lu1A', '垃圾', 1591260914901, 1592812588537, '110', 0, 0, 'http://127.0.0.1:9090/res/HXFUTEFNTTRM3]$_}2N)L@Q.jpg', 1592807361268);
+INSERT INTO `user` VALUES (7, 'jafir', 'cc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpciIsImV4cCI6MTU5NTM5OTMzNywidXNlcklkIjoiNyJ9._Mf2LyElh5qbKDzDlXu4PcUvNSwX3tiPdEe7r143zPU', '韩建飞1', 1591263522452, 1592802255531, '139820043241', 0, 0, 'http://127.0.0.1:9090/res/10276266.jpeg', 1592807338186);
+INSERT INTO `user` VALUES (8, 'jafir111', 'jafir', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjExMSIsImV4cCI6MTU5MjAxMzQ3NCwidXNlcklkIjoiOCJ9.c2frWaz66ccDy8nwz3ESt3TfPOnXfmG8eofc0PPC-HI', '王雷儿子呢', 1591263705525, 1592802449171, '110', 0, 0, 'http://127.0.0.1:9090/res/计速官方logo_inverse.jpg', NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

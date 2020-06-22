@@ -10,4 +10,8 @@ public class AllUserResult {
     private Long uid;
     private String name;
     private String avatar;
+    private String username;
+    private String mobile;
+    private Long lastLoginTime;
+    private int  role;
 }

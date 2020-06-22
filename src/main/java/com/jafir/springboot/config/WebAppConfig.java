@@ -4,13 +4,21 @@ package com.jafir.springboot.config;
  * Created by jafir on 2020/6/4.
  */
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.jafir.springboot.interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -57,7 +65,7 @@ public class WebAppConfig implements WebMvcConfigurer{
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**").
                 excludePathPatterns("/error","/login","/create_user",
-                        "/getAllUrl","/test1","/test.html");
+                        "/getAllUrl","/test1","/test.html","/res/**");
     }
 
     /**
@@ -67,25 +75,36 @@ public class WebAppConfig implements WebMvcConfigurer{
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         // 清除默认 Json 转换器
-//        converters.removeIf(converter -> converter instanceof MappingJackson2HttpMessageConverter);
-//
-//        // 配置 FastJson
-//        FastJsonConfig config = new FastJsonConfig();
-//        config.setSerializerFeatures(SerializerFeature.QuoteFieldNames, SerializerFeature.WriteEnumUsingToString,
-//                SerializerFeature.WriteDateUseDateFormat,
-//                SerializerFeature.DisableCircularReferenceDetect);
-//
-//        // 添加 FastJsonHttpMessageConverter
-//        FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
-//        fastJsonHttpMessageConverter.setFastJsonConfig(config);
-//        List<MediaType> fastMediaTypes = new ArrayList<>();
-//        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-//        fastJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypes);
-//        converters.add(fastJsonHttpMessageConverter);
-//
-//        // 添加 StringHttpMessageConverter，解决中文乱码问题
-//        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
-//        converters.add(stringHttpMessageConverter);
+        converters.removeIf(converter -> converter instanceof MappingJackson2HttpMessageConverter);
+
+        // 配置 FastJson
+        FastJsonConfig config = new FastJsonConfig();
+
+
+        config.setSerializerFeatures(
+                //List字段如果为null,输出为[],而非null
+                SerializerFeature.WriteNullListAsEmpty,
+                //是否输出值为null的字段,默认为false
+                SerializerFeature.WriteMapNullValue,
+                //字符串null返回空字符串
+                SerializerFeature.WriteNullStringAsEmpty,
+                //空布尔值返回false
+                SerializerFeature.WriteNullBooleanAsFalse,
+                //结果是否格式化,默认为false
+                SerializerFeature.PrettyFormat);
+
+
+        // 添加 FastJsonHttpMessageConverter
+        FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
+        fastJsonHttpMessageConverter.setFastJsonConfig(config);
+        List<MediaType> fastMediaTypes = new ArrayList<>();
+        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
+        fastJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypes);
+        converters.add(fastJsonHttpMessageConverter);
+
+        // 添加 StringHttpMessageConverter，解决中文乱码问题
+        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        converters.add(stringHttpMessageConverter);
     }
 
 }
