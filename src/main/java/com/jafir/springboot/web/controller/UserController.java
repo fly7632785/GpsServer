@@ -65,6 +65,7 @@ public class UserController extends BaseController {
             User user = userService.getUserByName(username);
             String token = JwtUtil.sign(username, String.valueOf(user.getUid()));
             user.setToken(token);
+            user.setLastLoginTime(System.currentTimeMillis());
             userService.updateUser(user);
             return ResponseUtil.makeOK(new LoginResult(token, user.getUid().toString()));
         }

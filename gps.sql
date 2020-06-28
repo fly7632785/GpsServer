@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 22/06/2020 16:45:53
+ Date: 23/06/2020 17:04:27
 */
 
 SET NAMES utf8mb4;
@@ -98,20 +98,27 @@ CREATE TABLE `user` (
   `update_time` bigint DEFAULT NULL,
   `mobile` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
   `gender` tinyint(1) DEFAULT '0' COMMENT '0:男 1:女',
-  `user_role` tinyint NOT NULL DEFAULT '0',
+  `user_role` tinyint(3) unsigned zerofill DEFAULT '000',
   `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
   `last_login_time` bigint DEFAULT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES (5, 'jafir1', 'jafir1', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjEiLCJleHAiOjE1OTUzOTkzNjEsInVzZXJJZCI6IjUifQ.b19laBWFeHhihs3MfD7p6P849FOdqUVt7BP6mM0lu1A', '垃圾', 1591260914901, 1592812588537, '110', 0, 0, 'http://127.0.0.1:9090/res/HXFUTEFNTTRM3]$_}2N)L@Q.jpg', 1592807361268);
-INSERT INTO `user` VALUES (7, 'jafir', 'cc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpciIsImV4cCI6MTU5NTM5OTMzNywidXNlcklkIjoiNyJ9._Mf2LyElh5qbKDzDlXu4PcUvNSwX3tiPdEe7r143zPU', '韩建飞1', 1591263522452, 1592802255531, '139820043241', 0, 0, 'http://127.0.0.1:9090/res/10276266.jpeg', 1592807338186);
-INSERT INTO `user` VALUES (8, 'jafir111', 'jafir', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjExMSIsImV4cCI6MTU5MjAxMzQ3NCwidXNlcklkIjoiOCJ9.c2frWaz66ccDy8nwz3ESt3TfPOnXfmG8eofc0PPC-HI', '王雷儿子呢', 1591263705525, 1592802449171, '110', 0, 0, 'http://127.0.0.1:9090/res/计速官方logo_inverse.jpg', NULL);
+INSERT INTO `user` VALUES (5, 'jafir1', '', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjEiLCJleHAiOjE1OTU0MTAwNTQsInVzZXJJZCI6IjUifQ.3rkm3ZesGC0sDFW4QvWwicYvPUdf6Jssfpd71nCQkhk', '垃圾', 1591260914901, 1592818089856, '7777', 0, 000, 'http://127.0.0.1:9090/res/C34D15D2B1E94BB8BB3FA7133A3E2E70.jpg', 1592807361268);
+INSERT INTO `user` VALUES (7, 'jafir', 'cc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpciIsImV4cCI6MTU5NTQ4Njc3NiwidXNlcklkIjoiNyJ9.pmxsQi19ccJv_UBtjfNL2t8P4SWYbbE_csprwcMoDJQ', '韩建飞', 1591263522452, 1592818029335, '13982004324', 0, 000, 'http://127.0.0.1:9090/res/10276266.jpeg', 1592894776113);
+INSERT INTO `user` VALUES (8, 'jafir111', 'jafir', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJqYWZpcjExMSIsImV4cCI6MTU5MjAxMzQ3NCwidXNlcklkIjoiOCJ9.c2frWaz66ccDy8nwz3ESt3TfPOnXfmG8eofc0PPC-HI', '王雷儿子呢', 1591263705525, 1592802449171, '110', 0, 000, 'http://127.0.0.1:9090/res/计速官方logo_inverse.jpg', NULL);
+INSERT INTO `user` VALUES (9, 'han', 'han', NULL, 'han', 1592822994600, NULL, NULL, NULL, NULL, 'http://127.0.0.1:9090/res/D732E60B0C67092E8518BE59E75BC97F.jpg', NULL);
+INSERT INTO `user` VALUES (10, 'hhh', 'hhh', NULL, 'hhhh', 1592827443499, NULL, '139999', NULL, NULL, 'http://127.0.0.1:9090/res/C34D15D2B1E94BB8BB3FA7133A3E2E70.jpg', NULL);
+INSERT INTO `user` VALUES (11, 'h', 'h', NULL, 'h', 1592827560438, NULL, 'h', NULL, NULL, 'http://127.0.0.1:9090/res/HXFUTEFNTTRM3]$_}2N)L@Q.jpg', NULL);
+INSERT INTO `user` VALUES (12, 'jj', 'jj', NULL, '1111111111', 1592878620216, NULL, 'hhhhh', NULL, NULL, '/img/logo.82b9c7a5.png', NULL);
+INSERT INTO `user` VALUES (13, 'kk', 'kk', NULL, 'kk', 1592878916033, NULL, 'kk', NULL, NULL, '/img/logo.82b9c7a5.png', NULL);
+INSERT INTO `user` VALUES (14, 'll', 'll', NULL, 'aa', 1592879243810, 1592879601776, '13982000411', NULL, NULL, '/img/logo.82b9c7a5.png', NULL);
+INSERT INTO `user` VALUES (15, 'aa', 'aa', NULL, 'aa', 1592879370351, NULL, '13982004324', NULL, NULL, '/img/logo.82b9c7a5.png', NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

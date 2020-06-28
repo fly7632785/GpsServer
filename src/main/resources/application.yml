@@ -27,10 +27,11 @@ spring:
     date-format : yyyy-MM-dd HH:mm:ss
   datasource:
 #  local  3306   root 7632785
-    url: jdbc:mysql://localhost:3306/gps?useSSL=false&useUnicode=true&characterEncoding=utf-8
+#    url: jdbc:mysql://localhost:3306/gps?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://121.40.229.140:3309/gps?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     driverClass: com.mysql.jdbc.Driver
     username: root
-    password: 7632785
+    password: WangLei1994
     initialSize: 2
     minIdl: 2
     maxActive: 20
