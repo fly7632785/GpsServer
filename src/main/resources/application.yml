@@ -61,6 +61,8 @@ spring:
       enabled: true
       force: true
 
+
+
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
   configuration:

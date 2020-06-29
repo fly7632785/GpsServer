@@ -1,6 +1,7 @@
 package com.jafir.springboot.web.controller;
 
 import com.jafir.springboot.service.IGpsService;
+import com.jafir.springboot.service.impl.SettingService;
 import com.jafir.springboot.service.model.Location;
 import com.jafir.springboot.service.model.api.ResponseResult;
 import com.jafir.springboot.service.model.api.ResponseUtil;
@@ -21,6 +22,8 @@ public class GpsController extends BaseController {
 
     @Autowired
     private IGpsService gpsService;
+    @Autowired
+    private SettingService settingService;
 
 
     @RequestMapping(value = "gps", method = RequestMethod.POST)
@@ -29,7 +32,7 @@ public class GpsController extends BaseController {
         Long uid = Long.valueOf(JwtUtil.getUserId(token));
         location.setUid(uid);
         gpsService.upload(location);
-        return ResponseUtil.makeOK();
+        return ResponseUtil.makeOK(settingService.getUploadInterval());
     }
 
 
