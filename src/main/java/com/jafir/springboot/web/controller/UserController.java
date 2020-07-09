@@ -107,6 +107,9 @@ public class UserController extends BaseController {
             user.setUid(uid);
         }
         user.setUpdateTime(System.currentTimeMillis());
+        if ("".equals(user.getPassword())) {
+            user.setPassword(null);
+        }
         userService.updateUser(user);
         LogUtil.info("user1" + user);
         return ResponseUtil.makeOK(user);
