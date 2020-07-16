@@ -4,10 +4,10 @@ server:
     address : 0.0.0.0
     contextPath : /
     #Tomcat specifics
-    ssl:
-      key-store-password: 7632785
-      key-store-type: PKCS12
-      key-store: /Users/jafir/Downloads/upload/cert/*.keep999.cn.pfx
+#    ssl:
+#      key-store-password: 7632785
+#      key-store-type: PKCS12
+#      key-store: /Users/jafir/Downloads/upload/cert/*.nofoo.cn.pfx
     tomcat:
         accessLogEnabled : true
         protocolHeader : x-forwarded-proto

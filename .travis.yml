@@ -1,0 +1,21 @@
+language: java
+services:
+- docker
+sudo: required
+branches:
+  only:
+  - master
+addons:
+    ssh_known_hosts: 47.108.82.91
+before_install:
+  - openssl aes-256-cbc -K $encrypted_d51746e9182b_key -iv $encrypted_d51746e9182b_iv
+  - in nopwd.enc -out ~\/.ssh/nopwd -d
+script:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - docker build -t registry.cn-hangzhou.aliyuncs.com/jafir_docker_images/jafir-images:latest .
+after_success:
+  - docker login --username=jafir@1866908499405822 -p=fly7632785 registry.cn-hangzhou.aliyuncs.com
+  - docker push registry.cn-hangzhou.aliyuncs.com/jafir_docker_images/jafir-images:latest
+  - chmod 600 nopwd
+  - ssh -o "StrictHostKeyChecking no" root@47.108.82.91 "cd /mydockerdata;sudo docker-compose -f docker-compose.yml pull;sudo docker-compose -f docker-compose.yml up -d;exit"
+
