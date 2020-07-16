@@ -10,7 +10,7 @@ addons:
 before_install:
   - openssl aes-256-cbc -K $encrypted_d51746e9182b_key -iv $encrypted_d51746e9182b_iv
     -in nopwd.enc -out ~/.ssh/id_rsa -d
-    - chmod 600 ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
 script:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - docker build -t registry.cn-hangzhou.aliyuncs.com/jafir_docker_images/jafir-images:latest .
