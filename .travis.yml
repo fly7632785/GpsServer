@@ -12,12 +12,9 @@ before_install:
   -in nopwd.enc -out ~/.ssh/nopwd -d
 script:
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-- docker build -t registry.cn-hangzhou.aliyuncs.com/jafir_docker_images/jafir-images:latest
-  .
+- docker build -t registry.cn-hangzhou.aliyuncs.com/jafir_docker_images/jafir-images:latest .
 after_success:
 - docker login --username=jafir@1866908499405822 -p=fly7632785 registry.cn-hangzhou.aliyuncs.com
 - docker push registry.cn-hangzhou.aliyuncs.com/jafir_docker_images/jafir-images:latest
 - chmod 600 ~/.ssh/nopwd
-- ssh -o "StrictHostKeyChecking no" -i ~/.ssh/nopwd root@47.108.82.91 "cd /mydockerdata;sudo
-  docker-compose -f docker-compose.yml pull;sudo docker-compose -f docker-compose.yml
-  up -d;exit"
+- ssh -o "StrictHostKeyChecking no" -i ~/.ssh/nopwd root@47.108.82.91 "cd /mydockerdata;docker-compose -f docker-compose.yml pull;docker-compose -f docker-compose.yml up -d;exit"
