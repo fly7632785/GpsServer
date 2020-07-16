@@ -8,7 +8,7 @@ branches:
 addons:
   ssh_known_hosts: 47.108.82.91
 before_install:
-- openssl aes-256-cbc -K $encrypted_d51746e9182b_key -iv $encrypted_d51746e9182b_iv
+- openssl aes-256-cbc -iv $encrypted_d51746e9182b_iv -K $encrypted_d51746e9182b_key
   -in nopwd.enc -out ~/.ssh/nopwd -d
 script:
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
