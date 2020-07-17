@@ -50,6 +50,12 @@ public class UserController extends BaseController {
         return result;
     }
 
+    @RequestMapping("test")
+    @ResponseBody
+    public ResponseResult test() {
+        return ResponseUtil.makeOK();
+    }
+
     @RequestMapping(value = "/getusers", method = RequestMethod.GET)
     @ResponseBody
     public ResponseResult<List<AllUserResult>> getUsers() {

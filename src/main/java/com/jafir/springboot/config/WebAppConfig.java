@@ -65,6 +65,7 @@ public class WebAppConfig implements WebMvcConfigurer{
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**").
                 excludePathPatterns("/error","/login","/create_user",
+                        "test",
                         "/getAllUrl","/test1","/test.html","/res/**");
     }
 
